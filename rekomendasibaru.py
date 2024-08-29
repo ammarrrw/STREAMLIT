@@ -260,9 +260,9 @@ title="<h1 style='text-align: center;'>Rekomendasi Menu Makanan</h1>"
 st.markdown(title, unsafe_allow_html=True)
 with st.form("recommendation_form"):
     st.write("Sesuaikan data dan klik tombol \"Buat Rekomendasi\" untuk mendapatkan rekomendasi menu")
-    age = st.number_input('Umur',min_value=18, max_value=120, step=1)
-    height = st.number_input('Tinggi(cm)',min_value=165, max_value=300, step=1)
-    weight = st.number_input('Berat(kg)',min_value=60, max_value=300, step=1)
+    age = st.number_input('Umur',min_value=10, max_value=120, step=1)
+    height = st.number_input('Tinggi(cm)',min_value=100, max_value=300, step=1)
+    weight = st.number_input('Berat(kg)',min_value=10, max_value=300, step=1)
     gender = st.radio('Gender',('Laki-Laki','Perempuan'))
     # activity = st.select_slider('Aktifitas',options=['Sangat jarang olahraga ', 'Jarang olahraga', 'Olahraga Menengah (3-5 hari/minggu)', 
     # 'Sering Berolahraga (6-7 hari/minggu)', 'Sangat sering olahraga'])
