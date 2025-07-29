@@ -121,7 +121,7 @@ def generate_menu(dataset, total_kalori):
 def main():
     global makanan_pokok, lauk_hewani, lauk_nabati, sayuran, buah
 
-    # Load datasets
+
     makanan_pokok = pd.read_csv("Makanan Pokok.csv")
     lauk_hewani = pd.read_csv("Lauk Pauk (Hewani).csv")
     lauk_nabati = pd.read_csv("Lauk Pauk (Nabati).csv")
@@ -138,14 +138,14 @@ def main():
             data_waktu.append(frac_data.loc[split_values[s]:split_values[s+1]].head(3))
         return dict(zip(waktu, data_waktu))
 
-    # Generate random datasets
+
     makanan_pokok = random_dataset(makanan_pokok)
     lauk_hewani = random_dataset(lauk_hewani)
     lauk_nabati = random_dataset(lauk_nabati)
     sayuran = random_dataset(sayuran)
     buah = random_dataset(buah)
 
-    # Generate menus
+
     total_kalori=person.calories_calculator()
     Menu = generate_menu(makanan_pokok, total_kalori)
     Menu.extend(generate_menu(sayuran, total_kalori))
@@ -153,10 +153,10 @@ def main():
     Menu.extend(generate_menu(lauk_nabati, total_kalori))
     Menu.extend(generate_menu(buah, total_kalori))
 
-    # Membuat dictionary kosong untuk menyimpan data sesuai dengan waktu
+
     data_waktu = {'Pagi': [], 'Siang': [], 'Malam': []}
 
-    # Memisahkan data sesuai dengan waktu dan menyimpannya dalam dictionary
+
     for item in Menu:
         waktujadi = item['waktu']
         data_waktu[waktujadi].append(item)
@@ -169,12 +169,12 @@ def main():
     indeks2 = [1, 4, 7, 10, 13]
     indeks3 = [2, 5, 8, 11, 14]
 
-    # Menyimpan makanan pagi, siang, dan malam ke dalam tiga kategori
+
     menu_pagi = [[], [], []]
     menu_siang = [[], [], []]
     menu_malam = [[], [], []]
 
-    # Menyusun makanan ke dalam tiga kategori
+
     for idx, makanan_idx in enumerate([indeks1, indeks2, indeks3]):
         for idx_makanan in makanan_idx:
             makanan = data_pagi[idx_makanan]
@@ -191,10 +191,10 @@ def main():
             menu_malam[idx].append(makanan)
 
 
-    # Menampilkan menu
+
     col1, col2, col3 = st.columns(3)
 
-    # Menampilkan menu pagi di kolom pertama
+
     with col1:
         st.write("Menu Pagi:")
         for i, item in enumerate(menu_pagi, start=1):
@@ -214,7 +214,7 @@ def main():
             expander.write(f"Total lemak: {total_lemak:.2f} gram")
             expander.write(f"Total karbohidrat: {total_karbohidrat:.2f} gram")
 
-    # Menampilkan menu siang di kolom kedua
+
     with col2:
         st.write("Menu Siang:")
         for i, item in enumerate(menu_siang, start=1):
@@ -233,7 +233,7 @@ def main():
             expander.write(f"Total protein: {total_protein:.2f} gram")
             expander.write(f"Total lemak: {total_lemak:.2f} gram")
             expander.write(f"Total karbohidrat: {total_karbohidrat:.2f} gram")
-    # Menampilkan menu malam di kolom ketiga
+
     with col3:
         st.write("Menu Malam:")
         for i, item in enumerate(menu_malam, start=1):
@@ -255,7 +255,6 @@ def main():
 
 
 
-# Streamlit app
 title="<h1 style='text-align: center;'>Rekomendasi Menu Makanan</h1>"
 st.markdown(title, unsafe_allow_html=True)
 with st.form("recommendation_form"):
@@ -264,8 +263,6 @@ with st.form("recommendation_form"):
     height = st.number_input('Tinggi(cm)',min_value=100, max_value=300, step=1)
     weight = st.number_input('Berat(kg)',min_value=10, max_value=300, step=1)
     gender = st.radio('Gender',('Laki-Laki','Perempuan'))
-    # activity = st.select_slider('Aktifitas',options=['Sangat jarang olahraga ', 'Jarang olahraga', 'Olahraga Menengah (3-5 hari/minggu)', 
-    # 'Sering Berolahraga (6-7 hari/minggu)', 'Sangat sering olahraga'])
     
     generated = st.form_submit_button("Buat Rekomendasi")
 
